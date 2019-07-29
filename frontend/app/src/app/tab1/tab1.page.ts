@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicioCarritoService } from '../servicios/servicio-carrito/servicio-carrito.service';
-import { ItemCompra } from '../modelo/item-compra';
+import { Factura } from '../modelo/factura';
 
 @Component({
   selector: 'app-tab1',
@@ -10,7 +10,7 @@ import { ItemCompra } from '../modelo/item-compra';
 export class Tab1Page implements OnInit {
 
   constructor(private readonly servicioCarrito:ServicioCarritoService) { }
-  listaFacturas:ItemCompra[]=[];
+  listaFacturas:Factura[]=[];
   busqueda:string='';
   inputTipoBusqueda:boolean=true;
   flag:boolean=true;
@@ -18,6 +18,8 @@ export class Tab1Page implements OnInit {
   ngOnInit() {
     this.servicioCarrito.iniciarServicio();
     this.listaFacturas=this.servicioCarrito.obtenerFacturas();
+    console.log(this.listaFacturas);
+    
   }
 
   buscarPorCajero(){
@@ -31,11 +33,9 @@ export class Tab1Page implements OnInit {
   buscarFactura(){
     if(this.flag===true){
       this.listaFacturas=this.servicioCarrito.buscarFacturas(this.busqueda);
-      console.log('Buscar CLiente')
 
     }else{
       this.listaFacturas=this.servicioCarrito.buscarFacturasPorCajero(this.busqueda);
-      console.log('Buscar cajero');
     }
   }
 }

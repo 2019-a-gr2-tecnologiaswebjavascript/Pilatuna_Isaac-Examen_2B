@@ -50,8 +50,7 @@ export class MenuAplicacionPage implements OnInit {
     this.listaAplicaciones=this.baseDeDatos.buscarAplicacion(this.busqueda,this.idSistemaOperativo);
   }
   eliminarAplicacion(id:number){
-    this.baseDeDatos.eliminarAplicacion(id);
-    this.listaAplicaciones=this.baseDeDatos.obtenerListaAplicaciones(this.idSistemaOperativo);
+    this.listaAplicaciones=this.baseDeDatos.eliminarAplicacion(id);
   }
 
 }

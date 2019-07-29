@@ -1,7 +1,10 @@
 import { ItemCarrito } from './item-carrito';
 
-export interface ItemCompra{
-
+export interface Factura{
+    
+    id?: number;
+    createdAt?: number;
+    updatedAt?: number;
     nombreComprador:string;
     nombreCajero:string;
     identificacion:string;
@@ -9,5 +12,5 @@ export interface ItemCompra{
     telefono:string;
     correo:string;
     total:number;
-    carrito:ItemCarrito[];
+    carrito?:ItemCarrito[];
 }

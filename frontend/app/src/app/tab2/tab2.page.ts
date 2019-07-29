@@ -24,18 +24,8 @@ export class Tab2Page {
 
   ngOnInit() {
     //this.baseDeDatos.iniciarServicio();
-    //this.listaSistemas=this.baseDeDatos.obtenerListaSistemas();
-    this.listaSistemas=[
-      {
-        nombre:'S.O. 1',
-        version:0.8,
-        fecha:new Date(),      
-        peso_gb:1.5,
-        instalado:true,
-        id:Date.now()
-  
-      }
-    ];
+    this.listaSistemas=this.baseDeDatos.obtenerListaSistemas();
+    
   }
   
    async presentModal() {

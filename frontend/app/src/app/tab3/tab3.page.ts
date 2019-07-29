@@ -4,7 +4,7 @@ import { DatosCajeroService } from '../servicios/servicios-cajero/datos-cajero.s
 import { ServicioCarritoService } from '../servicios/servicio-carrito/servicio-carrito.service';
 import { Aplicacion } from '../modelo/aplicacion';
 import { ItemCarrito } from '../modelo/item-carrito';
-import { ItemCompra } from '../modelo/item-compra';
+import { Factura } from '../modelo/factura';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -35,7 +35,10 @@ export class Tab3Page implements OnInit {
 
 ngOnInit(){
   this.nombreCajero=this.datosCajero.obtenerNombreCajero();
-  //this.baseDeDatos.iniciarServicio();
+  this.listaAplicaciones=this.baseDeDatos.obtenerTodasLasAplicaciones();
+}
+
+refreshAplicaciones(){
   this.listaAplicaciones=this.baseDeDatos.obtenerTodasLasAplicaciones();
 }
 agregarAplicacion(nombre:string,version:number,costo:number,id:number){
@@ -105,7 +108,7 @@ restarUnoAlItem(index:number,costo:number){
 
 finalizarCompra(){
   if(this.total>0){
-    const itemCompra:ItemCompra={
+    const itemCompra:Factura={
     nombreComprador:this.nombre,
     nombreCajero:this.nombreCajero,
     identificacion:this.identificacion,

@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Comprar
+      <h1>
+          Comprar
+      </h1>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,6 +14,11 @@
       <ion-col size="12">
         <h3 style="text-align: center;width: 100%;font-weight: bold">
           Lista de aplicaciones
+          <ion-button (click)="refreshAplicaciones()">
+            <ion-icon name="refresh">
+
+            </ion-icon>
+          </ion-button>
         </h3>
         <ion-list style="width: 100%">
             <ion-grid>

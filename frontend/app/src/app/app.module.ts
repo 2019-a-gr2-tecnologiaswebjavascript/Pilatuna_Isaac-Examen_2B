@@ -12,11 +12,12 @@ import { ModalCrearSOPage } from './modal-crear-so/modal-crear-so.page';
 import { ModalCrearSOPageModule } from './modal-crear-so/modal-crear-so.module';
 import { ModalCrearAPPPage } from './modal-crear-app/modal-crear-app.page';
 import { ModalCrearAPPPageModule } from './modal-crear-app/modal-crear-app.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [ModalCrearAPPPage,ModalCrearSOPage],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,ModalCrearAPPPageModule,ModalCrearSOPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,ModalCrearAPPPageModule,ModalCrearSOPageModule,HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,

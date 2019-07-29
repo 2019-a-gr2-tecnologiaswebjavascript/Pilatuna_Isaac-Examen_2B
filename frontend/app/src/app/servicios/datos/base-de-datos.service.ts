@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SistemaOperativo } from 'src/app/modelo/sistema-operativo';
 import { Aplicacion } from 'src/app/modelo/aplicacion';
+import { SistemaOperativoHttpService } from '../http/sistema-operativo-http.service';
+import { AplicacionHttpService } from '../http/aplicacion-http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,11 @@ export class BaseDeDatosService {
 
   listaSistemas:SistemaOperativo[]=[];
   listaAplicaciones:Aplicacion[]=[];
-  constructor() { }
+  constructor(
+    private readonly _sistemaOperativoHttpService:SistemaOperativoHttpService,
+    private readonly _aplicacionHttpService:AplicacionHttpService,
+    
+    ) { }
 
   guardarBase(){
     const data={'listaSistemas':this.listaSistemas,'listaAplicaciones':this.listaAplicaciones}
@@ -23,26 +29,66 @@ export class BaseDeDatosService {
   }
 
   obtenerListaSistemas():SistemaOperativo[]{
+    const todosSistemas$ =this._sistemaOperativoHttpService
+                          .obtenerTodos();
+  
+    todosSistemas$.subscribe(
+      (sistemasObtenidos)=>{
+        this.listaSistemas=sistemasObtenidos;
+        console.log(sistemasObtenidos);
+      },
+      (error)=>{
+        console.log(error);
+      }
+    );
     return this.listaSistemas;
   }
 
   agregarSistema(sistemaNuevo:SistemaOperativo){
     this.listaSistemas.push(sistemaNuevo);
-    console.log(this.listaSistemas);
-    this.guardarBase();
+    const sistemaCrear$ = this._sistemaOperativoHttpService
+                            .crear(
+                              {nombre:sistemaNuevo.nombre, 
+                                version:sistemaNuevo.version,
+                                fecha:sistemaNuevo.fecha,
+                                peso_gb:sistemaNuevo.peso_gb,
+                                instalado:sistemaNuevo.instalado
+                            });
+
+    sistemaCrear$.subscribe(
+                  (nuevoSistema)=>{
+                    console.log(nuevoSistema);
+                  },
+                  (error)=>{
+                    console.log(error);
+                  }
+    );
     return this.listaSistemas;
   }
 
   eliminarSistema(idSistema:number):SistemaOperativo[]{
-    this.listaSistemas.forEach(
-      function(item,indice,array){
-        if(item.id==idSistema){
-          array.splice(indice,1);
-        }
+    this.listaSistemas.forEach(element => {
+      if(element.id==idSistema){
+        const indice=this.listaSistemas.indexOf(element);
+        this.listaSistemas.splice(indice,1);
+        this.borrarSistemaHTTP(idSistema);
       }
-    );
-    this.guardarBase();
+    });
     return this.listaSistemas;
+  }
+
+  borrarSistemaHTTP(idSistema){
+    const sistemaBorrar$ = this._sistemaOperativoHttpService
+    .eliminar(idSistema);
+
+    sistemaBorrar$.subscribe(
+    (sistemaBorrado)=>{
+      console.log(sistemaBorrado);
+    },
+    (error)=>{
+      console.log(error);
+    }
+    );
   }
   
   buscarSistema(busqueda:string):SistemaOperativo[]{
@@ -60,47 +106,94 @@ export class BaseDeDatosService {
   }
 
   obtenerTodasLasAplicaciones():Aplicacion[]{
+    var todasApps$ =this._aplicacionHttpService
+                          .obtenerTodos();
+    todasApps$.subscribe(
+      (appsObtenidas)=>{
+        this.listaAplicaciones=appsObtenidas;
+        
+      },
+      (error)=>{
+        console.log(error);
+      },
+      
+    );
     return this.listaAplicaciones;
 
   }
 
   obtenerListaAplicaciones(idBusqueda:number):Aplicacion[]{
     var indices=[];
+    this.obtenerTodasLasAplicaciones();
     this.listaAplicaciones.forEach(
       function(item,indice,array){
-        if(item.sistemaOperativoId==idBusqueda){
+        if(item.fkSistemaOperativo==idBusqueda){
           indices.push(indice);
         }
       }
     );
     var listaSearch=indices.map(i => this.listaAplicaciones[i]);
-    return listaSearch;
+  return listaSearch;
+    
   }
+  
   agregarAplicacion(aplicacionNueva:Aplicacion){
-    this.listaAplicaciones.push(aplicacionNueva);
-    this.guardarBase();
-    console.log(this.listaAplicaciones);
+    
+    const appCrear$ = this._aplicacionHttpService
+                            .crear(
+                              {nombre:aplicacionNueva.nombre, 
+                                version:aplicacionNueva.version,
+                                url:aplicacionNueva.url,
+                                fecha:aplicacionNueva.fecha,
+                                peso_gb:aplicacionNueva.peso_gb,
+                                costo:aplicacionNueva.costo,
+                                fkSistemaOperativo:aplicacionNueva.fkSistemaOperativo
+                            });
+
+    appCrear$.subscribe(
+                  (aplicacionNueva)=>{
+                    this.listaAplicaciones.push(aplicacionNueva);
+                  },
+                  (error)=>{
+                    console.log(error);
+                  }
+    );
     
     return this.listaAplicaciones;
   }
 
   eliminarAplicacion(idAplicacion:number):Aplicacion[]{
-    this.listaAplicaciones.forEach(
-      function(item,indice,array){
-        if(item.id==idAplicacion){
-          array.splice(indice,1);
-        }
+    this.listaAplicaciones.forEach(element => {
+      if(element.id==idAplicacion){
+        const indice = this.listaAplicaciones.indexOf(element);
+        this.listaAplicaciones.splice(indice,1);
+        this.eliminarAplicacionHTTP(idAplicacion);
       }
-    );
-    this.guardarBase();
+    });
     return this.listaAplicaciones;
+  }
+
+  eliminarAplicacionHTTP(idAplicacion){
+    const appBorrar$ = this._aplicacionHttpService
+    .eliminar(idAplicacion);
+
+    appBorrar$.subscribe(
+    (aplicacionBorrada)=>{
+      console.log(aplicacionBorrada);
+    },
+    (error)=>{
+      console.log(error);
+    }
+    );
+
   }
 
   buscarAplicacion(busqueda:string,id:number):Aplicacion[]{
     var indices=[];
+    console.log(this.listaAplicaciones)
     this.listaAplicaciones.forEach(
       function(item,indice,array){
-        if(item.nombre.includes(busqueda)&&item.sistemaOperativoId==id){
+        if(item.nombre.includes(busqueda)&&item.fkSistemaOperativo.id==id){
           indices.push(indice);
         }
       }

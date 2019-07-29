@@ -42,12 +42,11 @@ export class ModalCrearAPPPage implements OnInit {
       fecha:fechaLanzamiento,      
       peso_gb:this.inputPesoGB,
       costo:this.inputCosto,
-      sistemaOperativoId:this.idSistemaOperativo,
+      fkSistemaOperativo:this.idSistemaOperativo,
       id:Date.now()
 
     }
     this.baseDeDatos.agregarAplicacion(nuevaApp);
-    this.baseDeDatos.obtenerListaAplicaciones(this.idSistemaOperativo);
     this.closeModal();
   }
 

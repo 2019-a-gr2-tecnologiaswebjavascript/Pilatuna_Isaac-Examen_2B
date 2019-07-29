@@ -8,7 +8,8 @@ const routes: Routes = [
   },
   { path: 'modal-crear-so', loadChildren: './modal-crear-so/modal-crear-so.module#ModalCrearSOPageModule' },
   { path: 'menu-aplicacion', loadChildren: './menu-aplicacion/menu-aplicacion.module#MenuAplicacionPageModule' },
-  { path: 'modal-crear-app', loadChildren: './modal-crear-app/modal-crear-app.module#ModalCrearAPPPageModule' }
+  { path: 'modal-crear-app', loadChildren: './modal-crear-app/modal-crear-app.module#ModalCrearAPPPageModule' },
+  { path: 'autenticacion', loadChildren: './autenticacion/autenticacion.module#AutenticacionPageModule' }
 ];
 @NgModule({
   imports: [
