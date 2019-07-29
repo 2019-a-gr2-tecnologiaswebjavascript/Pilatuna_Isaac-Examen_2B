@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Crear Aplicacion</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeModal()">Cerrar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+      <ion-item>
+          <ion-col size="4">
+              <ion-label>Nombre:</ion-label>
+          </ion-col>
+          <ion-col size="8">
+              <ion-input [(ngModel)]="inputNombre" placeholder="Nombre"></ion-input>
+          </ion-col>
+        </ion-item>
+        <ion-item>
+            <ion-col size="4">
+                <ion-label>Versión:</ion-label>
+            </ion-col>
+            <ion-col size="8">
+                <ion-input type="number" [(ngModel)]="inputVersion" placeholder="Versión"></ion-input>
+            </ion-col>
+          </ion-item>
+          <ion-item>
+              <ion-col size="4">
+                  <ion-label>Fecha de lanzamiento:</ion-label>
+              </ion-col>
+              <ion-col size="8">
+                  <ion-input type="date" [(ngModel)]="inputFecha" placeholder="Fecha"></ion-input>
+              </ion-col>
+            </ion-item>
+            <ion-item>
+                <ion-col size="4">
+                    <ion-label>Peso en GB:</ion-label>
+                </ion-col>
+                <ion-col size="8">
+                    <ion-input type="number" [(ngModel)]="inputPesoGB" placeholder="Peso en GB"></ion-input>
+                </ion-col>
+            </ion-item>
+            <ion-item>
+                <ion-col size="4">
+                    <ion-label>URL de descarga:</ion-label>
+                </ion-col>
+                <ion-col size="8">
+                    <ion-input [(ngModel)]="inputURL" placeholder="URL"></ion-input>
+                </ion-col>
+            </ion-item>
+            <ion-item>
+                <ion-col size="4">
+                    <ion-label>Costo:</ion-label>
+                </ion-col>
+                <ion-col size="8">
+                    <ion-input type="number" [(ngModel)]="inputCosto" placeholder="Costo en $"></ion-input>
+                </ion-col>
+            </ion-item>
+          <ion-item>
+            <ion-col size="6">
+              <ion-button color="success" (click)="guardarApp()">
+                Guardar
+              </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button color="danger" (click)="closeModal()">
+                Cancelar
+              </ion-button>
+            </ion-col>
+          </ion-item>
+  </ion-content>
+  

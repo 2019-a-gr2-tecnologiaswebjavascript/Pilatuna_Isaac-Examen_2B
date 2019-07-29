@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="return()">
+            <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    <ion-title>Administrar S.O.: {{sistemaOperativo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <h3>
+            Crear Aplicacion
+        </h3>
+      <ion-row>
+        <ion-col size="12" style="text-align: center">
+            <ion-button  (click)="presentModal()">Crear Aplicación</ion-button>
+        </ion-col>
+      </ion-row>
+      <h3>
+          Buscar Aplicación
+      </h3>
+      <ion-row>
+        <ion-col size="8">
+            <ion-input placeholder="Nombre de Aplicacion" [(ngModel)]="busqueda"></ion-input>
+          </ion-col>
+        <ion-col size="4">
+            <ion-button (click)="buscarApp()">Buscar</ion-button>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-list style="width: 100%">
+            
+              <h3>
+                  Lista de Aplicaciones
+              </h3>
+            
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">Nombre</ion-col>
+                <ion-col size="2">Version</ion-col>
+                <ion-col size="2">Peso en GB</ion-col>
+                <ion-col size="2">Eliminar</ion-col>
+              </ion-row>
+            </ion-grid>
+          <ion-item class="active"  *ngFor="let aplicacion of listaAplicaciones">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="6">{{aplicacion.nombre}}</ion-col>
+                  <ion-col size="2">{{aplicacion.version}}</ion-col>
+                  <ion-col size="2">{{aplicacion.peso_gb}}</ion-col>
+                  <ion-col size="2">
+                    <ion-button color="danger" (click)="eliminarAplicacion(aplicacion.id)">Eliminar</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+          </ion-item>
+        </ion-list>
+      </ion-row>
+    </ion-grid>
+</ion-content>
+

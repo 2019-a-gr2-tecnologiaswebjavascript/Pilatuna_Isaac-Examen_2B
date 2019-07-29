@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Administrar grupos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+      <h3>
+          Crear Sistema Operativo
+      </h3>
+    <ion-row>
+      <ion-col size="12" style="text-align: center">
+          <ion-button  (click)="presentModal()">Crear S.O.</ion-button>
+      </ion-col>
+    </ion-row>
+    <h3>
+        Buscar Sistema Operativo
+    </h3>
+    <ion-row>
+      <ion-col size="8">
+          <ion-input placeholder="Nombre S.O." [(ngModel)]="busqueda"></ion-input>
+        </ion-col>
+      <ion-col size="4">
+          <ion-button (click)="buscarSistema()">Buscar</ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-list style="width: 100%">
+          
+            <h3>
+                Lista de Sistemas Operativos
+            </h3>
+          
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4">Nombre</ion-col>
+              <ion-col size="2">Version</ion-col>
+              <ion-col size="2">Peso en GB</ion-col>
+              <ion-col size="2">Ver</ion-col>
+              <ion-col size="2">Eliminar</ion-col>
+            </ion-row>
+          </ion-grid>
+        <ion-item class="active"  *ngFor="let sistema of listaSistemas">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="4">{{sistema.nombre}}</ion-col>
+                <ion-col size="2">{{sistema.version}}</ion-col>
+                <ion-col size="2">{{sistema.peso_gb}}</ion-col>
+                <ion-col size="2">
+                  <ion-button (click)="verSistema(sistema.id,sistema.nombre)">Ver</ion-button>
+                </ion-col>
+                <ion-col size="2">
+                  <ion-button color="danger" (click)="eliminarSistema(sistema.id)">Eliminar</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-row>
+  </ion-grid>
+</ion-content>
