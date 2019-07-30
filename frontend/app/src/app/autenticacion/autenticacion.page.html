@@ -3,7 +3,9 @@
     <ion-title>Autenticacion</ion-title>
   </ion-toolbar>
 </ion-header>
+<style>
 
+</style>
 <ion-content fullscreen>
     <ion-card>
         <ion-card-header style="text-align: center">
@@ -11,16 +13,40 @@
             <h1>
                 Iniciar Sesión
             </h1>
+            <ion-icon name="person" color="primary">
+
+            </ion-icon>
           </ion-card-title>
-          <div style="text-align: center">
-              <img src="../../assets/images/user.png"  style="width: 50%;margin: 0%;margin-left: 25%;margin-right: 25%;" >
-          </div>
         </ion-card-header>
       
         <ion-card-content>
-          
-          Keep close to Nature's heart... and break clear away, once in awhile,
-          and climb a mountain or spend a week in the woods. Wash your spirit clean.
+          <ion-row>
+            <ion-col size="3">
+
+            </ion-col>
+            <ion-col size="3">
+                <ion-label>Nombre Cajero: </ion-label>
+            </ion-col>
+            <ion-col size="3">
+                <ion-input placeholder="Nombre cajero" [(ngModel)]="nombreCajero">
+                  </ion-input>
+            </ion-col>
+            
+            <ion-col size="3">
+
+              </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="12" style="text-align: center">
+              <ion-button (click)="iniciarSesion()">
+                <ion-icon name="contact">
+      
+                </ion-icon>
+                Iniciar Sesión
+              </ion-button>
+            </ion-col>
+          </ion-row>
         </ion-card-content>
       </ion-card>
 </ion-content>

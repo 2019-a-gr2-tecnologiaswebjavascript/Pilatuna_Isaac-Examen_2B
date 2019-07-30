@@ -17,7 +17,7 @@ export class ExisteCajeroService implements CanActivate {
         console.log('Bienvenido');
         return true;
       } else {
-        const url = ['/cajero','app'];
+        const url = ['/autenticacion'];
         this._router.navigate(url);
         console.log('No tiene permisos');
         return false;

@@ -16,7 +16,6 @@ export class Tab1Page implements OnInit {
   flag:boolean=true;
   
   ngOnInit() {
-    this.servicioCarrito.iniciarServicio();
     this.listaFacturas=this.servicioCarrito.obtenerFacturas();
     console.log(this.listaFacturas);
     

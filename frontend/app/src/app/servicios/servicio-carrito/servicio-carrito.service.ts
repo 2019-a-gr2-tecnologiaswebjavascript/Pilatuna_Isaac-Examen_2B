@@ -36,10 +36,7 @@ export class ServicioCarritoService {
 
   }
 
-  iniciarServicio(){
-
-    this.leerBase();
-  }
+  
 
   obtenerFacturas():Factura[]{
     var todasFacturas$ =this._facturaHttpService
@@ -60,10 +57,7 @@ export class ServicioCarritoService {
     const data={'listaFacturas':this.totalVentas}
     localStorage.setItem('dataFacturas', JSON.stringify(data));
   }
-  leerBase(){
-    var getObject = JSON.parse(localStorage.getItem('dataFacturas'));
-    this.totalVentas=getObject['listaFacturas'];
-  }
+  
 
   buscarFacturas(nombre:string){
     var indices=[];
